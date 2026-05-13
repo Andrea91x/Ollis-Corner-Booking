@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Check-in | Olli's Corner Firenze</title>
+    <style>
+        :root {
+            --primary-color: #8871b9; 
+            --primary-light: #a491cc;
+            --bg-color: #f4f3f8;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-container {
+            background-color: var(--card-bg);
+            max-width: 700px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(136, 113, 185, 0.15);
+            border-top: 8px solid var(--primary-color);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 28px;
+        }
+
+        .section-title {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-group { margin-bottom: 15px; }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Hide extra guest sections by default */
+        .guest-section { display: none; }
+        #section-guest-1 { display: block; } /* First guest always visible */
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 18px;
+            width: 100%;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-light);
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+
+    <div class="header">
+        <h1>Olli's Corner Firenze</h1>
+        <p>Online Guest Registration</p>
+    </div>
+
+    <form id="checkinForm">
+        <input type="hidden" id="portalSource" value="Booking">
+
+        <div class="section-title">Stay Details</div>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Arrival Date</label>
+                <input type="date" id="arrivalDate" required>
+            </div>
+            <div class="form-group">
+                <label>Number of Nights</label>
+                <input type="number" id="numberOfNights" value="1" min="1" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Total number of guests?</label>
+            <select id="totalGuests" onchange="aggiornaOspiti()">
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+            </select>
+        </div>
+
+        <div id="ospiti-container">
+            
+            <div id="section-guest-1" class="guest-section">
+                <div class="section-title">Guest 1 (Lead Guest)</div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="g1_firstName" placeholder="e.g. John" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="g1_lastName" placeholder="e.g. Doe" required>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="g1_gender">
+                            <option value="M">Male (M)</option>
+                            <option value="F">Female (F)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id="g1_dob" required>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>City of Birth</label>
+                        <input type="text" id="g1_pob" placeholder="e.g. London" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nationality</label>
+                        <input type="text" id="g1_cit" placeholder="e.g. United Kingdom" required>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Document Type</label>
+                        <select id="g1_docT">
+                            <option value="ID CARD">ID Card</option>
+                            <option value="PASSPORT">Passport</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Document Number</label>
+                        <input type="text" id="g1_docN" placeholder="e.g. AB123456" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Upload Document Photo</label>
+                    <input type="file" id="g1_photo" accept="image/*" required>
+                </div>
+            </div>
+
+            <div id="section-guest-2" class="guest-section">
+                <div class="section-title">Guest 2</div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="g2_firstName" placeholder="e.g. Jane">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="g2_lastName" placeholder="e.g. Doe">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="g2_gender">
+                            <option value="M">Male (M)</option>
+                            <option value="F">Female (F)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id="g2_dob">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>City of Birth</label>
+                        <input type="text" id="g2_pob" placeholder="e.g. London">
+                    </div>
+                    <div class="form-group">
+                        <label>Nationality</label>
+                        <input type="text" id="g2_cit" placeholder="e.g. United Kingdom">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Upload Document Photo</label>
+                    <input type="file" id="g2_photo" accept="image/*">
+                </div>
+            </div>
+
+            <div id="section-guest-3" class="guest-section">
+                <div class="section-title">Guest 3</div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="g3_firstName" placeholder="e.g. Mark">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="g3_lastName" placeholder="e.g. Doe">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="g3_gender">
+                            <option value="M">Male (M)</option>
+                            <option value="F">Female (F)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id="g3_dob">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>City of Birth</label>
+                        <input type="text" id="g3_pob" placeholder="e.g. London">
+                    </div>
+                    <div class="form-group">
+                        <label>Nationality</label>
+                        <input type="text" id="g3_cit" placeholder="e.g. United Kingdom">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Upload Document Photo</label>
+                    <input type="file" id="g3_photo" accept="image/*">
+                </div>
+            </div>
+
+            <div id="section-guest-4" class="guest-section">
+                <div class="section-title">Guest 4</div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="g4_firstName" placeholder="e.g. Lucy">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="g4_lastName" placeholder="e.g. Doe">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="g4_gender">
+                            <option value="M">Male (M)</option>
+                            <option value="F">Female (F)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id="g4_dob">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>City of Birth</label>
+                        <input type="text" id="g4_pob" placeholder="e.g. London">
+                    </div>
+                    <div class="form-group">
+                        <label>Nationality</label>
+                        <input type="text" id="g4_cit" placeholder="e.g. United Kingdom">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Upload Document Photo</label>
+                    <input type="file" id="g4_photo" accept="image/*">
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="inviaTutto()">Submit Registration</button>
+    </form>
+</div>
+
+<script>
+    // --- MAGIA INVISIBILE DEL PORTALE ---
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const portale = urlParams.get('p');
+        const portalInput = document.getElementById('portalSource');
+
+        if (portale === 'airbnb') {
+            portalInput.value = 'Airbnb';
+        } else {
+            // Di default impostiamo Booking
+            portalInput.value = 'Booking';
+        }
+    };
+
+    function aggiornaOspiti() {
+        const numero = document.getElementById('totalGuests').value;
+        for (let i = 2; i <= 4; i++) {
+            document.getElementById('section-guest-' + i).style.display = 'none';
+        }
+        for (let i = 1; i <= numero; i++) {
+            document.getElementById('section-guest-' + i).style.display = 'block';
+        }
+    }
+
+    function inviaTutto() {
+        alert("Il portale registrato di nascosto è: " + document.getElementById('portalSource').value + ". Perfetto! Siamo pronti per preparare l'invio dati a Google.");
+    }
+</script>
+
+</body>
+</html>
