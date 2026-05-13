@@ -326,14 +326,7 @@
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         const portale = urlParams.get('p');
-        const portalInput = document.getElementById('portalSource');
-
-        if (portale === 'airbnb') {
-            portalInput.value = 'Airbnb';
-        } else {
-            // Di default impostiamo Booking
-            portalInput.value = 'Booking';
-        }
+        document.getElementById('portalSource').value = (portale === 'airbnb') ? 'Airbnb' : 'Booking';
     };
 
     function aggiornaOspiti() {
@@ -346,8 +339,81 @@
         }
     }
 
-    function inviaTutto() {
-        alert("Il portale registrato di nascosto è: " + document.getElementById('portalSource').value + ". Perfetto! Siamo pronti per preparare l'invio dati a Google.");
+    // Funzione per trasformare la foto in testo (Base64)
+    function getBase64(file) {
+        return new Promise((resolve, reject) => {
+            if (!file) { resolve(null); return; }
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve({
+                name: file.name,
+                mimeType: file.type,
+                base64: reader.result.split(',')[1]
+            });
+            reader.onerror = error => reject(error);
+        });
+    }
+
+    // Il motore che impacchetta e spedisce
+    async function inviaTutto() {
+        const btn = document.querySelector('.submit-btn');
+        btn.innerText = "Invio in corso... attendere";
+        btn.disabled = true;
+
+        try {
+            const numOspiti = parseInt(document.getElementById('totalGuests').value);
+            
+            // Raccogliamo i dati di base
+            let payload = {
+                portale: document.getElementById('portalSource').value,
+                arrivalDate: document.getElementById('arrivalDate').value,
+                notti: document.getElementById('numberOfNights').value,
+                totaleOspiti: numOspiti,
+                ospiti: []
+            };
+
+            // Raccogliamo foto e dati di ogni ospite
+            for(let i = 1; i <= numOspiti; i++) {
+                let fileInput = document.getElementById('g' + i + '_photo');
+                let fileData = await getBase64(fileInput.files[0]);
+
+                payload.ospiti.push({
+                    nome: document.getElementById('g' + i + '_firstName').value,
+                    cognome: document.getElementById('g' + i + '_lastName').value,
+                    sesso: document.getElementById('g' + i + '_gender').value,
+                    dataNas: document.getElementById('g' + i + '_dob').value,
+                    luogoNas: document.getElementById('g' + i + '_pob').value,
+                    cittadinanza: document.getElementById('g' + i + '_cit').value,
+                    tipoDoc: document.getElementById('g' + i + '_docT') ? document.getElementById('g' + i + '_docT').value : "",
+                    numDoc: document.getElementById('g' + i + '_docN') ? document.getElementById('g' + i + '_docN').value : "",
+                    foto: fileData
+                });
+            }
+
+            // --- QUI INSERIREMO L'URL CHE CI DARA' GOOGLE TRA POCO ---
+            const GOOGLE_APP_URL = "IL_TUO_URL_DI_GOOGLE"; 
+
+            // Spediamo tutto a Google
+            let response = await fetch(GOOGLE_APP_URL, {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            });
+
+            let result = await response.json();
+            if(result.status === "success") {
+                alert("Check-in completato con successo! Grazie.");
+                document.getElementById('checkinForm').reset();
+            } else {
+                alert("C'è stato un errore: " + result.message);
+            }
+
+        } catch(error) {
+            alert("Errore di connessione. Riprova.");
+            console.error(error);
+        } finally {
+            btn.innerText = "Submit Registration";
+            btn.disabled = false;
+        }
     }
 </script>
 
