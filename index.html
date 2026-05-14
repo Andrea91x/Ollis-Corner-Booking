@@ -80,9 +80,8 @@
             gap: 15px;
         }
 
-        /* Hide extra guest sections by default */
         .guest-section { display: none; }
-        #section-guest-1 { display: block; } /* First guest always visible */
+        #section-guest-1 { display: block; }
 
         .submit-btn {
             background-color: var(--primary-color);
@@ -106,7 +105,6 @@
 <body>
 
 <div class="form-container">
-
     <div class="header">
         <h1>Olli's Corner Firenze</h1>
         <p>Online Guest Registration</p>
@@ -138,208 +136,117 @@
         </div>
 
         <div id="ospiti-container">
-            
             <div id="section-guest-1" class="guest-section">
                 <div class="section-title">Guest 1 (Lead Guest)</div>
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" id="g1_firstName" placeholder="e.g. John" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" id="g1_lastName" placeholder="e.g. Doe" required>
-                    </div>
+                    <div class="form-group"><label>First Name</label><input type="text" id="g1_firstName" required></div>
+                    <div class="form-group"><label>Last Name</label><input type="text" id="g1_lastName" required></div>
                 </div>
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <select id="g1_gender">
-                            <option value="M">Male (M)</option>
-                            <option value="F">Female (F)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Date of Birth</label>
-                        <input type="date" id="g1_dob" required>
-                    </div>
+                    <div class="form-group"><label>Gender</label><select id="g1_gender" required><option value="M">M</option><option value="F">F</option></select></div>
+                    <div class="form-group"><label>Date of Birth</label><input type="date" id="g1_dob" required></div>
                 </div>
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label>City of Birth</label>
-                        <input type="text" id="g1_pob" placeholder="e.g. London" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Nationality</label>
-                        <input type="text" id="g1_cit" placeholder="e.g. United Kingdom" required>
-                    </div>
+                    <div class="form-group"><label>City of Birth</label><input type="text" id="g1_pob" required></div>
+                    <div class="form-group"><label>Nationality</label><input type="text" id="g1_cit" required></div>
                 </div>
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label>Document Type</label>
-                        <select id="g1_docT">
-                            <option value="ID CARD">ID Card</option>
-                            <option value="PASSPORT">Passport</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Document Number</label>
-                        <input type="text" id="g1_docN" placeholder="e.g. AB123456" required>
-                    </div>
+                    <div class="form-group"><label>Doc Type</label><select id="g1_docT" required><option value="ID CARD">ID Card</option><option value="PASSPORT">Passport</option></select></div>
+                    <div class="form-group"><label>Doc Number</label><input type="text" id="g1_docN" required></div>
                 </div>
-                <div class="form-group">
-                    <label>Upload Document Photo</label>
-                    <input type="file" id="g1_photo" accept="image/*,application/pdf" required>
-                </div>
+                <div class="form-group"><label>Photo/PDF Document</label><input type="file" id="g1_photo" accept="image/*,application/pdf" required></div>
             </div>
 
             <div id="section-guest-2" class="guest-section">
                 <div class="section-title">Guest 2</div>
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" id="g2_firstName" placeholder="e.g. Jane">
-                    </div>
-                    <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" id="g2_lastName" placeholder="e.g. Doe">
-                    </div>
+                    <div class="form-group"><label>First Name</label><input type="text" id="g2_firstName"></div>
+                    <div class="form-group"><label>Last Name</label><input type="text" id="g2_lastName"></div>
                 </div>
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <select id="g2_gender">
-                            <option value="M">Male (M)</option>
-                            <option value="F">Female (F)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Date of Birth</label>
-                        <input type="date" id="g2_dob">
-                    </div>
+                    <div class="form-group"><label>Gender</label><select id="g2_gender"><option value="M">M</option><option value="F">F</option></select></div>
+                    <div class="form-group"><label>Date of Birth</label><input type="date" id="g2_dob"></div>
                 </div>
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label>City of Birth</label>
-                        <input type="text" id="g2_pob" placeholder="e.g. London">
-                    </div>
-                    <div class="form-group">
-                        <label>Nationality</label>
-                        <input type="text" id="g2_cit" placeholder="e.g. United Kingdom">
-                    </div>
+                    <div class="form-group"><label>City of Birth</label><input type="text" id="g2_pob"></div>
+                    <div class="form-group"><label>Nationality</label><input type="text" id="g2_cit"></div>
                 </div>
-                <div class="form-group">
-                    <label>Upload Document Photo</label>
-                    <input type="file" id="g2_photo" accept="image/*">
+                <div class="grid-2">
+                    <div class="form-group"><label>Doc Type</label><select id="g2_docT"><option value="ID CARD">ID Card</option><option value="PASSPORT">Passport</option></select></div>
+                    <div class="form-group"><label>Doc Number</label><input type="text" id="g2_docN"></div>
                 </div>
+                <div class="form-group"><label>Photo/PDF Document</label><input type="file" id="g2_photo" accept="image/*,application/pdf"></div>
             </div>
 
             <div id="section-guest-3" class="guest-section">
                 <div class="section-title">Guest 3</div>
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" id="g3_firstName" placeholder="e.g. Mark">
-                    </div>
-                    <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" id="g3_lastName" placeholder="e.g. Doe">
-                    </div>
+                    <div class="form-group"><label>First Name</label><input type="text" id="g3_firstName"></div>
+                    <div class="form-group"><label>Last Name</label><input type="text" id="g3_lastName"></div>
                 </div>
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <select id="g3_gender">
-                            <option value="M">Male (M)</option>
-                            <option value="F">Female (F)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Date of Birth</label>
-                        <input type="date" id="g3_dob">
-                    </div>
+                    <div class="form-group"><label>Gender</label><select id="g3_gender"><option value="M">M</option><option value="F">F</option></select></div>
+                    <div class="form-group"><label>Date of Birth</label><input type="date" id="g3_dob"></div>
                 </div>
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label>City of Birth</label>
-                        <input type="text" id="g3_pob" placeholder="e.g. London">
-                    </div>
-                    <div class="form-group">
-                        <label>Nationality</label>
-                        <input type="text" id="g3_cit" placeholder="e.g. United Kingdom">
-                    </div>
+                    <div class="form-group"><label>City of Birth</label><input type="text" id="g3_pob"></div>
+                    <div class="form-group"><label>Nationality</label><input type="text" id="g3_cit"></div>
                 </div>
-                <div class="form-group">
-                    <label>Upload Document Photo</label>
-                    <input type="file" id="g3_photo" accept="image/*">
+                <div class="grid-2">
+                    <div class="form-group"><label>Doc Type</label><select id="g3_docT"><option value="ID CARD">ID Card</option><option value="PASSPORT">Passport</option></select></div>
+                    <div class="form-group"><label>Doc Number</label><input type="text" id="g3_docN"></div>
                 </div>
+                <div class="form-group"><label>Photo/PDF Document</label><input type="file" id="g3_photo" accept="image/*,application/pdf"></div>
             </div>
 
             <div id="section-guest-4" class="guest-section">
                 <div class="section-title">Guest 4</div>
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" id="g4_firstName" placeholder="e.g. Lucy">
-                    </div>
-                    <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" id="g4_lastName" placeholder="e.g. Doe">
-                    </div>
+                    <div class="form-group"><label>First Name</label><input type="text" id="g4_firstName"></div>
+                    <div class="form-group"><label>Last Name</label><input type="text" id="g4_lastName"></div>
                 </div>
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <select id="g4_gender">
-                            <option value="M">Male (M)</option>
-                            <option value="F">Female (F)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Date of Birth</label>
-                        <input type="date" id="g4_dob">
-                    </div>
+                    <div class="form-group"><label>Gender</label><select id="g4_gender"><option value="M">M</option><option value="F">F</option></select></div>
+                    <div class="form-group"><label>Date of Birth</label><input type="date" id="g4_dob"></div>
                 </div>
                 <div class="grid-2">
-                    <div class="form-group">
-                        <label>City of Birth</label>
-                        <input type="text" id="g4_pob" placeholder="e.g. London">
-                    </div>
-                    <div class="form-group">
-                        <label>Nationality</label>
-                        <input type="text" id="g4_cit" placeholder="e.g. United Kingdom">
-                    </div>
+                    <div class="form-group"><label>City of Birth</label><input type="text" id="g4_pob"></div>
+                    <div class="form-group"><label>Nationality</label><input type="text" id="g4_cit"></div>
                 </div>
-                <div class="form-group">
-                    <label>Upload Document Photo</label>
-                    <input type="file" id="g4_photo" accept="image/*">
+                <div class="grid-2">
+                    <div class="form-group"><label>Doc Type</label><select id="g4_docT"><option value="ID CARD">ID Card</option><option value="PASSPORT">Passport</option></select></div>
+                    <div class="form-group"><label>Doc Number</label><input type="text" id="g4_docN"></div>
                 </div>
+                <div class="form-group"><label>Photo/PDF Document</label><input type="file" id="g4_photo" accept="image/*,application/pdf"></div>
             </div>
         </div>
 
-        <button type="button" class="submit-btn" onclick="inviaTutto()">Submit Registration</button>
+        <button type="submit" class="submit-btn">Submit Registration</button>
     </form>
 </div>
 
 <script>
-    // --- MAGIA INVISIBILE DEL PORTALE ---
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
-        const portale = urlParams.get('p');
-        document.getElementById('portalSource').value = (portale === 'airbnb') ? 'Airbnb' : 'Booking';
+        document.getElementById('portalSource').value = (urlParams.get('p') === 'airbnb') ? 'Airbnb' : 'Booking';
+        aggiornaOspiti();
     };
 
     function aggiornaOspiti() {
-        const numero = document.getElementById('totalGuests').value;
-        for (let i = 2; i <= 4; i++) {
-            document.getElementById('section-guest-' + i).style.display = 'none';
-        }
-        for (let i = 1; i <= numero; i++) {
-            document.getElementById('section-guest-' + i).style.display = 'block';
+        const numero = parseInt(document.getElementById('totalGuests').value);
+        for (let i = 1; i <= 4; i++) {
+            const section = document.getElementById('section-guest-' + i);
+            const inputs = section.querySelectorAll('input, select');
+            if (i <= numero) {
+                section.style.display = 'block';
+                inputs.forEach(input => input.setAttribute('required', 'true'));
+            } else {
+                section.style.display = 'none';
+                inputs.forEach(input => input.removeAttribute('required'));
+            }
         }
     }
 
-    // Funzione per trasformare la foto in testo (Base64)
     function getBase64(file) {
         return new Promise((resolve, reject) => {
             if (!file) { resolve(null); return; }
@@ -354,16 +261,14 @@
         });
     }
 
-    // Il motore che impacchetta e spedisce
-    async function inviaTutto() {
+    document.getElementById('checkinForm').onsubmit = async function(e) {
+        e.preventDefault();
         const btn = document.querySelector('.submit-btn');
-        btn.innerText = "Invio in corso... attendere";
+        btn.innerText = "Sending... please wait";
         btn.disabled = true;
 
         try {
             const numOspiti = parseInt(document.getElementById('totalGuests').value);
-            
-            // Raccogliamo i dati di base
             let payload = {
                 portale: document.getElementById('portalSource').value,
                 arrivalDate: document.getElementById('arrivalDate').value,
@@ -372,11 +277,9 @@
                 ospiti: []
             };
 
-            // Raccogliamo foto e dati di ogni ospite
             for(let i = 1; i <= numOspiti; i++) {
                 let fileInput = document.getElementById('g' + i + '_photo');
                 let fileData = await getBase64(fileInput.files[0]);
-
                 payload.ospiti.push({
                     nome: document.getElementById('g' + i + '_firstName').value,
                     cognome: document.getElementById('g' + i + '_lastName').value,
@@ -384,16 +287,14 @@
                     dataNas: document.getElementById('g' + i + '_dob').value,
                     luogoNas: document.getElementById('g' + i + '_pob').value,
                     cittadinanza: document.getElementById('g' + i + '_cit').value,
-                    tipoDoc: document.getElementById('g' + i + '_docT') ? document.getElementById('g' + i + '_docT').value : "",
-                    numDoc: document.getElementById('g' + i + '_docN') ? document.getElementById('g' + i + '_docN').value : "",
+                    tipoDoc: document.getElementById('g' + i + '_docT').value,
+                    numDoc: document.getElementById('g' + i + '_docN').value,
                     foto: fileData
                 });
             }
 
-            // --- QUI INSERIREMO L'URL CHE CI DARA' GOOGLE TRA POCO ---
             const GOOGLE_APP_URL = "https://script.google.com/macros/s/AKfycbzpbAOhAfAOiKSXtRo5cnd4mEJ0yAgKY34gj-IX6cHgxu993YMEHxB9iEjx1V9RKY7yzg/exec"; 
 
-            // Spediamo tutto a Google
             let response = await fetch(GOOGLE_APP_URL, {
                 method: 'POST',
                 body: JSON.stringify(payload)
@@ -401,20 +302,18 @@
 
             let result = await response.json();
             if(result.status === "success") {
-                alert("Check-in completato con successo! Grazie.");
-                document.getElementById('checkinForm').reset();
+                alert("Check-in successful! Thank you.");
+                location.reload();
             } else {
-                alert("C'è stato un errore: " + result.message);
+                alert("Error: " + result.message);
             }
-
         } catch(error) {
-            alert("Errore di connessione. Riprova.");
-            console.error(error);
+            alert("Connection error. Try again.");
         } finally {
             btn.innerText = "Submit Registration";
             btn.disabled = false;
         }
-    }
+    };
 </script>
 
 </body>
